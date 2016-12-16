@@ -1,0 +1,37 @@
+<br>
+<br>
+<br>
+<br>
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @product.name %>
+</p>
+
+<p>
+  <strong>Category:</strong>
+  <%= @product.category.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @product.description %>
+</p>
+
+
+
+<p>
+  <strong>Seller:</strong>
+  <%= @product.user.username %>
+</p>
+<%=image_tag @product.image.url,size:300%>
+
+
+<%if @product.user==current_user%>
+	<p><%= link_to 'Edit', edit_product_path(@product) %>/<%=link_to 'Remove',@product,method: :delete,data:{confirm: "Are you sure?"}%> Listing</p>
+<%end%>
+<p><%= link_to 'Back', products_path %></p>
+
+<%=render "product_message"%>
+

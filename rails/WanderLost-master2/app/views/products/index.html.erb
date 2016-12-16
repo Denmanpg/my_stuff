@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<div class="jumbotron text-center">
+  <h2>My Homies!</h2>
+    <div class="btn-group" role="group" aria-label="People Groups">
+      <%= link_to "All Listings", products_path, class: "btn btn-default #{'active' unless params[:filter]}" %>
+      <%= link_to "My Listings", products_path(filter: "personal"), class: "btn btn-default #{'active' if params[:filter] == 'personal'}" %>
+          <a href="#" class="<%="btn btn-default #{'active' if params[:filter] == 'categorical'}"%>" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Categories<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <% @categories.each do|cat|%>
+              <li><%=link_to cat.name,products_path(filter: 'categorical',cat_id: cat.id)%></li>
+            <%end%>
+          </ul>
+      <%=link_to "Friend Listings",products_path(filter: 'friends'),class: "btn btn-default #{'active' if params[:filter] == 'friends'}"%>
+    </div>
+</div>
+
+
+<div class="container">
+<%if params[:filter]=="categorical"%>
+	<h1><%=@category.name%></h1>
+<%end%>
+  <div class="row">
+    <%= render @products %>
+  </div>
+</div>
+<%= link_to 'New Product', new_product_path %>

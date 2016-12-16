@@ -1,0 +1,41 @@
+<%= form_for(@message) do |f| %>
+
+<% if @message.errors.any? %>
+	<div class="error_explanation">
+		<h2><%= pluralize(@message.errors.count, "error") %>
+	prohibited this blog post from being saved: </h2>
+
+		<ul>
+			<% @message.errors.full_message.each do |errorMessage| %>
+				<li><%= errorMessage %></li>
+				<% end %>
+		</ul>
+	</div>
+	<% end %>
+
+	<p><strong>From: <%=current_user.username%></strong></p>
+	<p><strong>To: <%=@product.user.username%></strong></p>
+	<div class="form-group">
+		<%= f.text_field :subject, value: @product.name,readonly:true %>
+	</div>
+
+	<div class="form-group hidden">
+		<%= f.number_field :user_id, value: current_user.id %>
+	</div>
+	<div class="form-group hidden">
+		<%= f.number_field :recipient_id, value: @product.user.id%>
+	</div>
+
+	<div class="form-group">
+		<%= f.text_area :body, class: "form-control", placeholder: "Start typing away.." %>
+	</div>
+
+	<div class="form-group hidden">
+		<%=f.text_field :status,value:"unread"%>
+	</div>
+
+	<div class="actions">
+		<%= f.submit "Send", class: "btn btn-default" %>
+	</div>
+
+<% end %>

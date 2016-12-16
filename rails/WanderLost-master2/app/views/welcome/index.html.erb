@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>WanderLost</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+<body class="welcome">
+  
+    	<%= render 'welcome_nav' %>
+
+    	<% flash.each do |type, message| %>
+    		<div class="alert <%= bootstrap_class_for(type) %> fade-in">
+    			<button class="close" data-dismiss="alert">X</button>
+    			<%= message %>
+    		</div>
+    	<% end %>
+
+      <%= yield %>
+    <div class="headings">
+    <h2>"Not All Who Wander Are Lost." -John Muir</h2>
+    <h3>Every Friendship Has a Bit of Trail Magic.</h3>
+    </div>
+  
+</body>
+
+</html>

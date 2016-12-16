@@ -1,0 +1,23 @@
+<div class="jumbotron text-center">
+	<div class="btn-group" role="group" aria-label="People Groups">
+		<%= link_to "Inbox", user_messages_path, class: "btn btn-default #{'active' unless params[:filter]}" %>
+		<%= link_to "Sent", user_messages_path(filter: "sent"), class: "btn btn-default #{'active' if params[:filter] == 'sent'}" %>
+	</div>
+</div>
+<% @messages.each do|message|%>
+<div class="container">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<%if params[:filter]=="sent"%>
+				<p><b>To:</b> <%=link_to message.recipient.username, user_path(message.recipient.username)%></p>
+			<%else%>
+				<p><b>From:</b> <%=link_to message.user.username, user_path(message.user.username)%></p>
+			<%end%>
+			<p><b>Subject:</b> <%=link_to message.subject, message_path(id: message.id)%></p>
+		</div>
+		<div class="panel-body">
+			<p><%=message.body.truncate(50)%></p>
+		</div>
+	</div>
+</div>
+<%end%>

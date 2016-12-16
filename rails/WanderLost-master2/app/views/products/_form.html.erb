@@ -1,0 +1,29 @@
+<%= simple_form_for(@product) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form">
+    <%=f.label :name%>
+    <%=f.text_field :name,placeholder: "Product name"%>
+  </div>
+  <div class="field">
+    <%= f.select(:category_id,@categories.collect{|c|[c.name,c.id]},{include_blank: "Please Select a Category..."})%>
+  </div>
+  <div class="form">
+    <%=f.label :description%>
+    <%=f.text_area :description,placeholder: "About the product..."%>
+  </div>
+  <div class="form hidden">
+    <%=f.label :user_id%>
+    <%=f.number_field :user_id,value: current_user.id%>
+  </div>
+
+  <div class="field">
+    <strong>Upload Image</strong>
+    <%=f.file_field :image%>
+  </div>
+
+
+  <div class="actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>
